@@ -1,0 +1,23 @@
+.w-5 {
+  width: 20px;
+}
+
+.h-5 {
+  height: 20px;
+}
+
+.pl-16px {
+  padding-left: 16px;
+}
+
+.flex {
+  display: flex;
+}
+
+.items-center {
+  align-items: center;
+}
+
+.cursor-pointer {
+  cursor: pointer
+}

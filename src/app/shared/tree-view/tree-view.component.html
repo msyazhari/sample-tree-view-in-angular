@@ -1,0 +1,30 @@
+@for (item of getChildren(parentItemId); track item.id) {
+  <div class="flex items-center" [style.padding-left.px]="hasChildren(item.id) ? 0 : 20">
+    @if (hasChildren(item.id)) {
+      <svg (click)="item.isExpanded = !item.isExpanded"
+           xmlns="http://www.w3.org/2000/svg"
+           viewBox="0 0 20 20"
+           fill="currentColor"
+           class="w-5 h-5 cursor-pointer">
+        @if (item.isExpanded) {
+          <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        } @else {
+          <path fill-rule="evenodd" d="M8.22 5.22a.75.75 0 0 1 1.06 0l4.25 4.25a.75.75 0 0 1 0 1.06l-4.25 4.25a.75.75 0 0 1-1.06-1.06L11.94 10 8.22 6.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
+        }
+      </svg>
+    }
+    <input type="checkbox"
+           id="tree-view-item-{{ item.id }}"
+           [(ngModel)]="item.isChecked"
+           (change)="onItemCheckedChange(item)" />
+    <label for="tree-view-item-{{ item.id }}">{{ item.title }}</label>
+  </div>
+  @if (item.isExpanded && hasChildren(item.id)) {
+    <div class="pl-16px">
+      <tree-view [items]="items"
+                 [parentItemId]="item.id"
+                 (itemCheckedChange)="onItemCheckedChange($event)">
+      </tree-view>
+    </div>
+  }
+}
